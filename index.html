@@ -183,19 +183,19 @@
     これが、無駄を捨てた“再起動”プログラムだ。🔥
   </p>
 
-  <a class="btn" href="https://www.youtube.com/watch?v=oPY20FjhGMo&t=2s" target="_blank" aria-label="Distraction Dance Video">
+  <a class="btn" href="https://www.youtube.com/watch?v=oPY20FjhGMo&t=2s" target="_blank">
     🕺 無料動画
   </a>
 
-  <a class="btn" id="ai-btn" aria-label="AIアシスタント (Nyan Cat)">
+  <a class="btn" id="ai-btn">
     🤖 AIアシスタントを見る
   </a>
 
-  <a class="btn" id="paid-btn" aria-label="有料コース (Top G Modal)">
-    💰 有料コース
+  <a class="btn" id="paid-btn">
+    💰 Lonely 😞
   </a>
 
-  <a class="btn" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" aria-label="Shadowborn秘密ページ">
+  <a class="btn" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
     🌀 Shadowborn秘密ページ
   </a>
 
@@ -203,8 +203,8 @@
     「私たちは貧乏だ。だから教師の金を奪うしかない。😂 冗談です（笑）」
   </p>
 
-  <audio id="moneySound" src="https://assets.mixkit.co/active_storage/sfx/2267/2267-preview.mp3" preload="auto"></audio>
-  <audio id="nyanSound" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="auto"></audio>
+  <!-- ✅ Replace below URL with your actual working mp3 -->
+  <audio id="nyanSound" src="https://www.myinstants.com/media/sounds/nyan-cat-original.mp3" preload="auto"></audio>
   <audio id="topgSound" src="https://actions.google.com/sounds/v1/voiceover/andrew_tate_top_g.ogg" preload="auto"></audio>
 
   <div class="modal-overlay" id="modal">
@@ -226,15 +226,18 @@
     const modalDesc = document.getElementById('modalDesc');
 
     const nyanSound = document.getElementById('nyanSound');
-    const moneySound = document.getElementById('moneySound');
     const topgSound = document.getElementById('topgSound');
 
-    aiBtn.addEventListener('click', () => {
-      try {
-        nyanSound.currentTime = 0;
-        nyanSound.play();
-      } catch (e) { console.warn("Nyan sound error", e); }
+    function resetAllAudio() {
+      [nyanSound, topgSound].forEach(audio => {
+        audio.pause();
+        audio.currentTime = 0;
+      });
+    }
 
+    aiBtn.addEventListener('click', () => {
+      resetAllAudio();
+      nyanSound.play();
       modalImage.src = 'https://media.giphy.com/media/sIIhZliB2McAo/giphy.gif';
       modalImage.alt = 'Nyan Cat flying through space';
       modalDesc.textContent = 'にゃんにゃんキャット 🎶';
@@ -242,11 +245,8 @@
     });
 
     paidBtn.addEventListener('click', () => {
-      try {
-        topgSound.currentTime = 0;
-        topgSound.play();
-      } catch (e) { console.warn("Top G sound error", e); }
-
+      resetAllAudio();
+      topgSound.play();
       modalImage.src = 'https://i.ibb.co/fq9p29Q/andrew-tate-face.jpg';
       modalImage.alt = 'Andrew Tate face';
       modalDesc.textContent = 'TOP G';
@@ -255,10 +255,7 @@
 
     const closeModal = () => {
       modal.style.display = 'none';
-      [nyanSound, topgSound, moneySound].forEach(audio => {
-        audio.pause();
-        audio.currentTime = 0;
-      });
+      resetAllAudio();
     };
 
     modalClose.addEventListener('click', closeModal);
