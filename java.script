@@ -1,1 +1,19 @@
+paidBtn.addEventListener('click', () => {
+  resetAllAudio();
 
+  const freddyContainer = document.getElementById('freddyPlayer');
+  const iframe = document.getElementById('freddyIframe');
+
+  // Load the YouTube embed with autoplay and no controls
+  iframe.src = "https://www.youtube.com/embed/ikCa3Lr9pKU?autoplay=1&controls=0&modestbranding=1&rel=0&fs=1";
+
+  // Show and go full screen
+  freddyContainer.style.display = "block";
+  if (freddyContainer.requestFullscreen) {
+    freddyContainer.requestFullscreen();
+  } else if (freddyContainer.webkitRequestFullscreen) {
+    freddyContainer.webkitRequestFullscreen();
+  } else if (freddyContainer.msRequestFullscreen) {
+    freddyContainer.msRequestFullscreen();
+  }
+});
