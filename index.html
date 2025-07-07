@@ -1,35 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>Shadowborn Reboot</title>
+  <title>再起動 | RESET</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Noto+Sans+JP:wght@700&display=swap" rel="stylesheet">
   <style>
-    body { 
-      background-color: black; 
-      color: white; 
-      font-family: sans-serif; 
-      text-align: center; 
-      padding: 50px; 
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      font-family: 'Noto Sans JP', sans-serif;
+      background: linear-gradient(to bottom, #0a0a0a, #1a1a1a);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background-image: url('https://www.transparenttextures.com/patterns/black-felt.png');
+      background-repeat: repeat;
     }
+
+    h1 {
+      font-size: 60px;
+      font-family: 'Orbitron', sans-serif;
+      color: #ff3333;
+      margin-bottom: 10px;
+      letter-spacing: 5px;
+    }
+
+    p {
+      font-size: 18px;
+      color: #ccc;
+      max-width: 600px;
+      margin-bottom: 40px;
+    }
+
     .btn {
       display: inline-block;
-      margin: 10px;
+      margin: 12px;
       padding: 15px 30px;
-      background-color: crimson;
+      background-color: #ff1a1a;
       color: white;
       text-decoration: none;
       font-weight: bold;
-      border-radius: 8px;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px #ff1a1a;
     }
+
     .btn:hover {
-      background-color: darkred;
+      background-color: #cc0000;
+      box-shadow: 0 0 20px #ff1a1a;
+      transform: scale(1.05);
+    }
+
+    .sub-title {
+      font-size: 14px;
+      color: #666;
+      margin-top: 5px;
     }
   </style>
 </head>
 <body>
 
-  <h1>再起動プログラムへようこそ</h1>
-  <p>感情を武器に、習慣を再構築せよ。</p>
+  <h1>再起動</h1>
+  <div class="sub-title">— RESET PROGRAM —</div>
+
+  <p>感情を武器にせよ。己を制御し、混沌から蘇れ。</p>
 
   <a class="btn" href="https://youtube.com" target="_blank">▶ 無料動画を見る</a>
   <a class="btn" href="https://your-ai-page.com" target="_blank">🤖 AIサポートに入る</a>
