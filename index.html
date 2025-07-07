@@ -7,150 +7,176 @@
   <style>
     /* Reset */
     * {
-      box-sizing: border-box;
+      margin: 0; padding: 0; box-sizing: border-box;
     }
 
-    body, html {
-      margin: 0; 
-      padding: 0;
+    html, body {
       height: 100%;
       font-family: 'Noto Sans JP', sans-serif;
-      background: 
-        linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.85)),
+      background:
+        linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.9)),
         url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
       background-size: cover;
-      color: white;
+      color: #eee;
+      overflow-x: hidden;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 20px;
-      overflow-x: hidden;
-      position: relative;
+      padding: 30px 20px 60px;
       user-select: none;
+      position: relative;
+      line-height: 1.6;
     }
 
-    /* Title */
+    /* Glow pulse for main title */
+    @keyframes pulseGlow {
+      0%, 100% {
+        text-shadow:
+          0 0 6px #ff3333,
+          0 0 20px #ff0000,
+          0 0 30px #cc0000,
+          0 0 40px #800000;
+      }
+      50% {
+        text-shadow:
+          0 0 12px #ff6666,
+          0 0 30px #ff2222,
+          0 0 40px #cc2222,
+          0 0 50px #990000;
+      }
+    }
+
     h1 {
       font-family: 'Orbitron', sans-serif;
       font-weight: 700;
-      font-size: 72px;
-      color: #ff3b3b;
-      margin: 0;
-      letter-spacing: 6px;
-      text-shadow:
-        0 0 10px #ff3b3b,
-        0 0 20px #ff1a1a,
-        0 0 30px #cc0000,
-        0 0 40px #8b0000;
-      animation: pulse 3s infinite alternate ease-in-out;
+      font-size: 80px;
+      color: #ff4444;
+      letter-spacing: 8px;
+      margin-bottom: 8px;
       user-select: text;
+      animation: pulseGlow 3s ease-in-out infinite;
     }
 
-    @keyframes pulse {
-      0% {
-        text-shadow:
-          0 0 8px #ff3b3b,
-          0 0 16px #ff1a1a,
-          0 0 24px #cc0000,
-          0 0 30px #8b0000;
-      }
-      100% {
-        text-shadow:
-          0 0 20px #ff6666,
-          0 0 40px #ff3333,
-          0 0 60px #cc0000,
-          0 0 80px #660000;
-      }
-    }
-
-    /* Subtitle */
     .sub-title {
-      font-size: 16px;
-      margin-top: 5px;
-      margin-bottom: 40px;
-      font-weight: 700;
-      color: #bbb;
-      letter-spacing: 3px;
       font-family: 'Orbitron', sans-serif;
-      user-select: text;
-    }
-
-    /* Main paragraph */
-    p {
-      font-size: 20px;
-      max-width: 650px;
-      margin-bottom: 40px;
-      line-height: 1.5;
-      color: #ddd;
-      text-shadow: 0 0 6px rgba(0,0,0,0.7);
-      user-select: text;
-    }
-
-    /* Buttons */
-    .btn {
-      display: inline-block;
-      margin: 12px;
-      padding: 16px 36px;
-      background-color: rgba(255, 20, 20, 0.85);
-      color: #fff;
-      text-decoration: none;
       font-weight: 700;
       font-size: 18px;
-      border-radius: 14px;
-      box-shadow: 0 0 14px #ff2222;
-      transition: all 0.25s ease;
-      user-select: none;
-      letter-spacing: 1px;
-      font-family: 'Noto Sans JP', sans-serif;
+      letter-spacing: 5px;
+      color: #bbb;
+      margin-bottom: 40px;
+      user-select: text;
     }
 
+    /* Motivational paragraph style */
+    .motivation {
+      max-width: 700px;
+      font-size: 20px;
+      color: #ddd;
+      text-shadow: 0 0 7px rgba(0,0,0,0.85);
+      margin-bottom: 40px;
+      user-select: text;
+    }
+
+    /* Additional paragraphs */
+    .motivation.small {
+      font-size: 16px;
+      color: #aaa;
+      max-width: 600px;
+      margin-top: -20px;
+      margin-bottom: 40px;
+      font-style: italic;
+      user-select: text;
+    }
+
+    /* Buttons styling */
+    .btn {
+      display: inline-block;
+      margin: 14px 14px;
+      padding: 18px 38px;
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      background: rgba(255, 24, 24, 0.9);
+      border-radius: 15px;
+      text-decoration: none;
+      box-shadow:
+        0 0 8px #ff2222,
+        0 0 14px #ff1111,
+        0 0 22px #cc0000;
+      transition: all 0.3s ease;
+      letter-spacing: 1.5px;
+      font-family: 'Noto Sans JP', sans-serif;
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+    }
     .btn:hover {
-      background-color: rgba(204, 0, 0, 0.95);
-      box-shadow: 0 0 30px #ff4444;
-      transform: scale(1.07);
+      background: rgba(204, 0, 0, 0.98);
+      box-shadow:
+        0 0 20px #ff4444,
+        0 0 40px #ff2222,
+        0 0 60px #cc1111;
+      transform: scale(1.1);
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    /* Button icon spacing */
+    .btn svg {
+      vertical-align: middle;
+      margin-right: 8px;
+      filter: drop-shadow(0 0 2px black);
     }
 
     /* Quote overlay */
     .quote-overlay {
       position: absolute;
-      top: 20px;
+      top: 24px;
       right: 30px;
-      max-width: 280px;
-      font-size: 18px;
+      max-width: 320px;
+      font-size: 20px;
       color: #bbb;
       font-family: 'Reenie Beanie', cursive;
       font-style: italic;
       text-align: right;
-      user-select: none;
-      text-shadow: 0 0 6px black;
+      text-shadow: 0 0 8px black;
       line-height: 1.3;
-      letter-spacing: 0.8px;
+      user-select: none;
+      letter-spacing: 0.9px;
     }
 
-    /* Footer */
+    /* Footer style */
     .footer {
-      position: absolute;
-      bottom: 18px;
+      position: fixed;
+      bottom: 20px;
       font-size: 13px;
       color: #666;
-      text-shadow: 0 0 4px black;
+      text-shadow: 0 0 5px black;
       user-select: none;
+      width: 100%;
+      text-align: center;
+      font-family: monospace;
     }
 
-    /* Money joke */
+    /* Small joke text */
     .money-joke {
-      font-size: 14px;
-      color: #aaa;
-      margin-top: 10px;
-      text-shadow: 0 0 5px rgba(0,0,0,0.8);
+      font-size: 15px;
+      color: #999;
+      margin-top: 12px;
+      margin-bottom: 48px;
+      max-width: 550px;
       user-select: text;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
+      font-style: italic;
+      text-shadow: 0 0 5px rgba(0,0,0,0.85);
+      letter-spacing: 0.7px;
     }
 
+    /* Button SVG icons (inline) */
+    .btn svg path {
+      fill: white;
+    }
   </style>
 </head>
 <body>
@@ -162,14 +188,21 @@
   <h1>再起動</h1>
   <div class="sub-title">— RESET PROGRAM —</div>
 
-  <p>
-    ⚔️ 感情を最大の武器に変え、己の内なる混沌を制御し、<br />
-    常に変化し続ける世界で不動の強さを築け。<br />
-    これが、無駄を捨てた“再起動”プログラムだ。🔥
+  <p class="motivation">
+    ⚔️ 感情を最大の武器に変え、己の内なる混沌を制御し、<br>
+    常に変化し続ける世界で不動の強さを築け。<br>
+    これが、無駄を排除し本物を求める者のための“再起動”プログラムだ。🔥
   </p>
 
-  <a class="btn" href="https://www.youtube.com/watch?v=aP3gzee1cps" target="_blank" rel="noopener noreferrer" aria-label="無料動画：Henry Stickminダンス">
-    🕺 無料動画：Henry Stickminダンス
+  <p class="motivation small">
+    怠惰、虚無、混乱に飲まれるな。<br>
+    真実の厳しさを恐れず、自分の弱さを直視しろ。<br>
+    そして、毎日の習慣で強さを築け。動かぬ意思だけが、<br>
+    誰にも奪えぬ王座を守る盾となるのだ。
+  </p>
+
+  <a class="btn" href="https://www.youtube.com/watch?v=0Z6aFvm15xQ" target="_blank" rel="noopener noreferrer" aria-label="無料動画">
+    🔥 無料動画
   </a>
 
   <a class="btn" href="https://media.tenor.com/2roX3uxz_68AAAAC/dancing-robot.gif" target="_blank" rel="noopener noreferrer" aria-label="AIアシスタントを見る">
@@ -177,7 +210,7 @@
   </a>
 
   <a class="btn" href="https://your-paid-program.com" onclick="document.getElementById('moneySound').play()" target="_blank" rel="noopener noreferrer" aria-label="有料コースへ">
-    💰 有料コースへ
+    💰 Lonely 😞
   </a>
 
   <a class="btn" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener noreferrer" aria-label="Shadowborn秘密ページ">
