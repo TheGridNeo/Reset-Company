@@ -1,17 +1,1 @@
-modalClose.addEventListener('click', () => {
-  modal.style.display = 'none';
-  // Reset modal content back to sad man
-  modalImage.src = 'https://i.ibb.co/jDxmGvX/sad-man.png';
-  modalImage.alt = '悲しそうな男性';
-  modalDesc.textContent = '彼女いないんだ…';
-});
 
-modal.addEventListener('click', e => {
-  if (e.target === modal) {
-    modal.style.display = 'none';
-    // Reset modal content back to sad man
-    modalImage.src = 'https://i.ibb.co/jDxmGvX/sad-man.png';
-    modalImage.alt = '悲しそうな男性';
-    modalDesc.textContent = '彼女いないんだ…';
-  }
-});
