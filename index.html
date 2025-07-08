@@ -150,6 +150,21 @@
     .modal-close:hover {
       color: #ff0000;
     }
+    /* Fullscreen iframe container */
+    #videoFullscreenContainer {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: black;
+      z-index: 10000;
+      justify-content: center;
+      align-items: center;
+    }
+    #videoFullscreenIframe {
+      width: 100vw;
+      height: 100vh;
+      border: none;
+    }
   </style>
 </head>
 <body>
@@ -163,61 +178,94 @@
     常に変化し続ける世界で不動の強さを築け。<br />
     これが、無駄を捨てた“再起動”プログラムだ。🔥
   </p>
-  <a class="btn" href="https://www.youtube.com/watch?v=oPY20FjhGMo&t=2s" target="_blank">
-    🕺 無料動画
-  </a>
-  <a class="btn" id="ai-btn">
-    🤖 AIアシスタントを見る
-  </a>
-  <a class="btn" id="paid-btn">
-    💰 有料コース
-  </a>
-  <a class="btn" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
-    🔀 お金の取る方法
-  </a>
+
+  <a class="btn" id="free-video-btn">🕺 無料動画</a>
+  <a class="btn" id="ai-btn">🤖 AIアシスタントを見る</a>
+  <a class="btn" id="paid-btn">💰 Lonely 😞</a>
+  <a class="btn" id="secret-btn">🔀 Shadowborn秘密ページ</a>
+
   <p class="money-joke">
     「私たちは貧乏だ。だから教師の金を奪うしかない。😂 出處です（笑）」
   </p>
-  <audio id="nyanSound" src="https://www.myinstants.com/media/sounds/nyan-cat-original.mp3" preload="auto"></audio>
 
-  <!-- Fullscreen player container -->
-  <div id="freddyPlayer" style="display:none;">
-    <iframe id="freddyIframe"
-      src=""
-      frameborder="0"
-      allow="autoplay; fullscreen"
-      allowfullscreen
-      style="width:100vw; height:100vh; border:0;">
-    </iframe>
-  </div>
-
+  <!-- Modal for Nyan Cat -->
   <div class="modal-overlay" id="modal">
     <div class="modal-content">
       <span class="modal-close" id="modalClose">&times;</span>
-      <img id="modalImage" src="" alt="Modal Image">
+      <img id="modalImage" src="" alt="Modal Image" />
       <p id="modalDesc"></p>
     </div>
+  </div>
+
+  <!-- Fullscreen video container -->
+  <div id="videoFullscreenContainer" style="display:none; flex;">
+    <iframe
+      id="videoFullscreenIframe"
+      src=""
+      allow="autoplay; fullscreen; picture-in-picture"
+      allowfullscreen
+      frameborder="0"
+      allowtransparency="true"
+      title="Fullscreen Video Player"
+    ></iframe>
   </div>
 
   <div class="footer">© 2025 Ranario Familia — Rise or Fall. Your Choice.</div>
 
   <script>
+    const freeVideoBtn = document.getElementById('free-video-btn');
     const aiBtn = document.getElementById('ai-btn');
     const paidBtn = document.getElementById('paid-btn');
+    const secretBtn = document.getElementById('secret-btn');
     const modal = document.getElementById('modal');
     const modalClose = document.getElementById('modalClose');
     const modalImage = document.getElementById('modalImage');
     const modalDesc = document.getElementById('modalDesc');
-    const nyanSound = document.getElementById('nyanSound');
+    const fullscreenContainer = document.getElementById('videoFullscreenContainer');
+    const fullscreenIframe = document.getElementById('videoFullscreenIframe');
 
-    function resetAllAudio() {
-      nyanSound.pause();
-      nyanSound.currentTime = 0;
+    // URLs for each button, embedded with autoplay & minimal UI
+    const videoURLs = {
+      free: "https://www.youtube.com/embed/oPY20FjhGMo?autoplay=1&controls=0&modestbranding=1&rel=0&fs=1",
+      ai: "https://www.youtube.com/embed/2yJgwwDcgV8?autoplay=1&controls=0&modestbranding=1&rel=0&fs=1",
+      paid: "https://www.youtube.com/embed/ikCa3Lr9pKU?autoplay=1&controls=0&modestbranding=1&rel=0&fs=1",
+      secret: "https://www.youtube.com/embed/xvFZjo5PgG0?autoplay=1&controls=0&modestbranding=1&rel=0&fs=1"
+    };
+
+    function openFullscreenVideo(url) {
+      fullscreenIframe.src = url;
+      fullscreenContainer.style.display = 'flex';
+
+      // Try to request fullscreen on container (works in most browsers)
+      if (fullscreenContainer.requestFullscreen) {
+        fullscreenContainer.requestFullscreen();
+      } else if (fullscreenContainer.webkitRequestFullscreen) {
+        fullscreenContainer.webkitRequestFullscreen();
+      } else if (fullscreenContainer.msRequestFullscreen) {
+        fullscreenContainer.msRequestFullscreen();
+      }
     }
 
+    function closeFullscreenVideo() {
+      fullscreenIframe.src = '';
+      fullscreenContainer.style.display = 'none';
+
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      } else if (document.webkitFullscreenElement) {
+        document.webkitExitFullscreen();
+      } else if (document.msFullscreenElement) {
+        document.msExitFullscreen();
+      }
+    }
+
+    // Button event listeners
+    freeVideoBtn.addEventListener('click', () => {
+      openFullscreenVideo(videoURLs.free);
+    });
+
     aiBtn.addEventListener('click', () => {
-      resetAllAudio();
-      nyanSound.play();
+      // Show modal with Nyan Cat GIF and sound
       modalImage.src = 'https://media.giphy.com/media/sIIhZliB2McAo/giphy.gif';
       modalImage.alt = 'Nyan Cat flying through space';
       modalDesc.textContent = 'にゃんにゃんキャット 🎶';
@@ -225,32 +273,35 @@
     });
 
     paidBtn.addEventListener('click', () => {
-      resetAllAudio();
+      openFullscreenVideo(videoURLs.paid);
+    });
 
-      const freddyContainer = document.getElementById('freddyPlayer');
-      const iframe = document.getElementById('freddyIframe');
+    secretBtn.addEventListener('click', () => {
+      openFullscreenVideo(videoURLs.secret);
+    });
 
-      iframe.src = "https://www.youtube.com/embed/ikCa3Lr9pKU?autoplay=1&controls=0&modestbranding=1&rel=0&fs=1";
-      freddyContainer.style.display = "block";
+    // Close modal
+    modalClose.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
 
-      if (freddyContainer.requestFullscreen) {
-        freddyContainer.requestFullscreen();
-      } else if (freddyContainer.webkitRequestFullscreen) {
-        freddyContainer.webkitRequestFullscreen();
-      } else if (freddyContainer.msRequestFullscreen) {
-        freddyContainer.msRequestFullscreen();
+    // Close modal when clicking outside content
+    modal.addEventListener('click', e => {
+      if (e.target === modal) modal.style.display = 'none';
+    });
+
+    // Close fullscreen on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeFullscreenVideo();
+        modal.style.display = 'none';
       }
     });
 
-    modalClose.addEventListener('click', () => {
-      modal.style.display = 'none';
-      resetAllAudio();
-    });
-
-    modal.addEventListener('click', e => {
-      if (e.target === modal) {
-        modal.style.display = 'none';
-        resetAllAudio();
+    // Close fullscreen if user clicks outside the iframe container
+    fullscreenContainer.addEventListener('click', (e) => {
+      if (e.target === fullscreenContainer) {
+        closeFullscreenVideo();
       }
     });
   </script>
